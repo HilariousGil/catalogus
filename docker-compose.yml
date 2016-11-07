@@ -1,0 +1,15 @@
+database_ckan:
+  image: build.datapunt.amsterdam.nl:5000/atlas/postgres
+  ports:
+    - "5435:5432"
+  environment:
+    POSTGRES_USER: ckan
+    POSTGRES_DB: ckan
+    POSTGRES_PASSWORD: insecure
+
+ckan:
+  build: ./web
+  links:
+    - database_ckan:database_ckan
+  ports:
+    - "8100:8000"
