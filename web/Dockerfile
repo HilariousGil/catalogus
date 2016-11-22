@@ -36,12 +36,6 @@ RUN mkdir -p /etc/ckan/default \
 	&& mkdir /home/ckan/etc \
 	&& chown -R ckan /etc/ckan 
 
-# Setting up jetty and solr
-RUN mv /etc/default/jetty8 /etc/default/jetty8.bak
-COPY ckan/jetty /etc/default/jetty8
-RUN mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak \
-	&& ln -s /src/ckan/ckan/config/solr/schema.xml /etc/solr/conf/schema.xml
-
 # Setting ckan app
 USER ckan
 COPY ckan /app/
