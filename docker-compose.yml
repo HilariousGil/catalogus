@@ -7,9 +7,23 @@ database_ckan:
     POSTGRES_DB: ckan
     POSTGRES_PASSWORD: insecure
 
+solr_ckan:
+  build: ./solr
+  ports:
+    - "8983:8983"
+  entrypoint:
+    - docker-entrypoint.sh
+    - solr-precreate
+    - mycore
+
 ckan:
   build: ./web
   links:
     - database_ckan:database_ckan
+    - solr_ckan:solr_ckan
   ports:
     - "8100:8000"
+  environment:
+    CKAN_SQLALCHEMY_URL: "postgresql://ckan:insecure@database_ckan/ckan"
+    CKAN_SOLR_URL: "http://solr_ckan:8989/solr"
+    DEBIAN_FRONTEND: "noninteractive"
