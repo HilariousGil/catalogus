@@ -25,5 +25,5 @@ ckan:
     - "8100:8000"
   environment:
     CKAN_SQLALCHEMY_URL: "postgresql://ckan:insecure@database_ckan/ckan"
-    CKAN_SOLR_URL: "http://solr_ckan:8989/solr"
+    CKAN_SOLR_URL: "http://solr_ckan:8983/solr"
     DEBIAN_FRONTEND: "noninteractive"

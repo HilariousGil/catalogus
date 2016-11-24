@@ -1,11 +1,9 @@
-service jetty8 start
-
 echo Building db
+
+chown ckan: /var/lib/ckan
+
 cd /src/ckan
 paster db init -c /app/config.ini
 
-echo Linking who.ini
-ln -s /src/ckan/who.ini /app/who.ini
-
-cd /src/kcan
+cd /src/ckan
 paster serve /app/config.ini
