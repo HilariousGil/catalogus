@@ -30,13 +30,10 @@ RUN pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.6.0#egg=ckan'
 RUN pip install -r /src/ckan/requirements.txt
 #RUN pip install uwsgi
 
-# Installing other requirements
-# RUN pip install --no-cache-dir -r requirements.txt
 RUN mkdir -p /etc/ckan/default \
 	&& mkdir /home/ckan/etc \
 	&& mkdir /var/lib/ckan \
 	&& chown -R ckan /etc/ckan /var/lib/ckan
-
 
 # Setting ckan app
 USER ckan

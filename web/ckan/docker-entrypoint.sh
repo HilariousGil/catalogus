@@ -1,7 +1,5 @@
 echo Building db
 
-chown ckan: /var/lib/ckan
-
 cd /src/ckan
 paster db init -c /app/config.ini
 
