@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo Building db
 
 cd /src/ckan
