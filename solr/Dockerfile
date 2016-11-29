@@ -13,9 +13,8 @@ RUN apt-get update \
 	&& apt-get clean \
 	&& pip install --upgrade pip
 
-RUN ln -s /src/ckan/ckan/config/solr/schema.xml /opt/solr/schema.xml
-
 WORKDIR /opt/solr
+COPY schema.xml /opt/solr
 USER $SOLR_USER
 
 # ENTRYPOINT ["docker-entrypoint.sh"]

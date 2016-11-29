@@ -18,6 +18,7 @@ RUN apt-get update \
 		python-dev \
 		python-pip \
 		python-virtualenv \
+        curl \
 	&& apt-get clean \
 	&& pip install --upgrade pip
 
@@ -28,7 +29,6 @@ RUN adduser --system ckan
 RUN pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.6.0#egg=ckan'
 # Installing CKAN dependencies
 RUN pip install -r /src/ckan/requirements.txt
-#RUN pip install uwsgi
 
 RUN mkdir -p /etc/ckan/default \
 	&& mkdir /home/ckan/etc \
@@ -38,5 +38,6 @@ RUN mkdir -p /etc/ckan/default \
 # Setting ckan app
 USER ckan
 COPY ckan /app/
+RUN export CKAN_INI=/app/config.ini
 
 CMD /app/docker-entrypoint.sh
