@@ -11,6 +11,8 @@ solr_ckan:
   build: ./solr
   ports:
     - "8983:8983"
+#  volumes:
+#    - data:/opt/solr/server/solr/mycores
   entrypoint:
     - docker-entrypoint.sh
     - solr-precreate
@@ -23,7 +25,9 @@ ckan:
     - solr_ckan:solr_ckan
   ports:
     - "8100:8000"
+  volumes:
+    - ./data:/data
   environment:
     CKAN_SQLALCHEMY_URL: "postgresql://ckan:insecure@database_ckan/ckan"
-    CKAN_SOLR_URL: "http://solr_ckan:8983/solr"
+    CKAN_SOLR_URL: "http://solr_ckan:8983/solr/mycore"
     DEBIAN_FRONTEND: "noninteractive"

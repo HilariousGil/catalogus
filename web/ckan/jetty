@@ -1,7 +1,7 @@
 # Defaults for jetty see /etc/init.d/jetty8 for more
 
 # change to 1 to prevent Jetty from starting
-NO_START=0
+NO_START=1
 
 # change to 'no' or uncomment to use the default setting in /etc/default/rcS
 VERBOSE=yes
