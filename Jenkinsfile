@@ -25,7 +25,7 @@ node {
 
     stage("Build develop image") {
         tryStep "build", {
-            def image = docker.build("build.datapunt.amsterdam.nl:5000/atlas/catalogus:${env.BUILD_NUMBER}")
+            def image = docker.build("build.datapunt.amsterdam.nl:5000/atlas/catalogus:${env.BUILD_NUMBER}", "web")
             image.push()
             image.push("acceptance")
         }
