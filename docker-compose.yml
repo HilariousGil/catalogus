@@ -24,7 +24,7 @@ ckan:
     - database_ckan:database_ckan
     - solr_ckan:solr_ckan
   ports:
-    - "8100:8000"
+    - "8105:8000"
   volumes:
     - ./data:/data
   environment:
