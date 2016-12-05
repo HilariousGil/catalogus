@@ -3,16 +3,14 @@ database_ckan:
   ports:
     - "5435:5432"
   environment:
-    POSTGRES_USER: ckan
-    POSTGRES_DB: ckan
+    POSTGRES_USER: catalogus
+    POSTGRES_DB: catalogus
     POSTGRES_PASSWORD: insecure
 
 solr_ckan:
   build: ./solr
   ports:
     - "8983:8983"
-  volumes:
-    - data:/opt/solr/server/solr/mycores
 
 ckan:
   build: ./web
@@ -21,11 +19,12 @@ ckan:
     - solr_ckan:solr_ckan
   ports:
     - "8105:8000"
-  volumes:
-    - ./data:/data
   environment:
-    CKAN_SQLALCHEMY_URL: "postgresql://ckan:insecure@database_ckan/ckan"
-    CKAN_SOLR_URL: "http://solr_ckan:8983/solr/ckan"
+    POSTGRES_PORT_5432_TCP_ADDR: "database_ckan"
+    POSTGRES_PORT_5432_TCP_PORT: "5432"
+    POSTGRES_DB: catalogus
+    POSTGRES_USER: catalogus
+    POSTGRES_PASSWORD: "insecure"
+    SOLR_SERVICE: "solr_ckan"
+    SOLR_PORT: "8983"
     DEBIAN_FRONTEND: "noninteractive"
-
-
