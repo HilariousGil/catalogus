@@ -29,6 +29,11 @@ node {
             image.push()
             image.push("acceptance")
         }
+        tryStep "build SOLR", {
+            def image = docker.build("build.datapunt.amsterdam.nl:5000/datapunt/catalogus-solr:${env.BUILD_NUMBER}", "solr")
+            image.push()
+            image.push("acceptance")
+        }
     }
 }
 
