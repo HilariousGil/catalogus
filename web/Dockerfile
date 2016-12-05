@@ -17,6 +17,7 @@ RUN apt-get update \
 		python-dev \
 		python-pip \
 		python-virtualenv \
+		netcat-openbsd \
         curl \
 	&& apt-get clean \
 	&& pip install --upgrade pip
