@@ -18,13 +18,8 @@ ckan:
     - database_ckan:database_ckan
     - solr_ckan:solr_ckan
   ports:
-    - "8105:8000"
+    - "8105:5000"
   environment:
-    POSTGRES_PORT_5432_TCP_ADDR: "database_ckan"
-    POSTGRES_PORT_5432_TCP_PORT: "5432"
-    POSTGRES_DB: catalogus
-    POSTGRES_USER: catalogus
-    POSTGRES_PASSWORD: "insecure"
-    SOLR_SERVICE: "solr_ckan"
-    SOLR_PORT: "8983"
-    DEBIAN_FRONTEND: "noninteractive"
+    CKAN_SQLALCHEMY_URL: postgresql://catalogus:insecure@database_ckan/catalogus
+    CKAN_SOLR_URL: http://solr_ckan:8983/solr/ckan
+#    DEBIAN_FRONTEND: "noninteractive"

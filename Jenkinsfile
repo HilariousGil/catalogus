@@ -71,6 +71,13 @@ node {
             image.push("production")
             image.push("latest")
         }
+        tryStep "image tagging SOLR", {
+            def image = docker.image("build.datapunt.amsterdam.nl:5000/datapunt/catalogus-solr:${env.BUILD_NUMBER}")
+            image.pull()
+
+            image.push("production")
+            image.push("latest")
+        }
     }
 }
 

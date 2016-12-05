@@ -3,6 +3,8 @@ FROM ubuntu:14.04
 USER root
 RUN apt-get update \
     && apt-get -y install wget vim sudo openjdk-7-jdk \
+    && apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && mkdir /usr/java \
     && ln -s /usr/lib/jvm/java-7-openjdk-amd64 /usr/java/default \
     && cd /opt \
@@ -10,7 +12,6 @@ RUN apt-get update \
     && tar -xvf solr-4.7.2.tgz \
     && cp -R solr-4.7.2/example /opt/solr \
     && cd /opt/solr/solr \
-    && apt-get clean \
     && mv collection1 ckan \
     && echo "name=ckan" > ckan/core.properties
 
