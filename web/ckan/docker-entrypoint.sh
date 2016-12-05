@@ -4,14 +4,14 @@ set -u
 set -e
 
 # wait for postgres to be started
-while ! netcat -z "database_ckan" "5432"
+while ! netcat -z ${DATABASE_PORT_5432_TCP_ADDR} ${DATABASE_PORT_5432_TCP_PORT}
 do
 	echo "Waiting for solr..."
 	sleep 1
 done
 
 # wait for solr to be started
-while ! netcat -z "solr_ckan" "8983"
+while ! netcat -z ${SOLR_PORT_8983_TCP_ADDR} ${SOLR_PORT_8983_TCP_PORT}
 do
 	echo "Waiting for solr..."
 	sleep 1
@@ -23,5 +23,5 @@ cd /src/ckan
 
 # rebuild solr index
 #paster search-index rebuild -c /app/config.ini
-paster db init -c /app/config.ini
+#paster db init -c /app/config.ini
 paster serve /app/config.ini

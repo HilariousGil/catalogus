@@ -1,4 +1,4 @@
-database_ckan:
+database:
   image: build.datapunt.amsterdam.nl:5000/atlas/postgres
   ports:
     - "5435:5432"
@@ -7,7 +7,7 @@ database_ckan:
     POSTGRES_DB: catalogus
     POSTGRES_PASSWORD: insecure
 
-solr_ckan:
+solr:
   build: ./solr
   ports:
     - "8983:8983"
@@ -15,11 +15,11 @@ solr_ckan:
 ckan:
   build: ./web
   links:
-    - database_ckan:database_ckan
-    - solr_ckan:solr_ckan
+    - database:database
+    - solr:solr
   ports:
     - "8105:5000"
   environment:
-    CKAN_SQLALCHEMY_URL: postgresql://catalogus:insecure@database_ckan/catalogus
-    CKAN_SOLR_URL: http://solr_ckan:8983/solr/ckan
+    CKAN_SQLALCHEMY_URL: postgresql://catalogus:insecure@database/catalogus
+    CKAN_SOLR_URL: http://solr:8983/solr/ckan
 #    DEBIAN_FRONTEND: "noninteractive"
