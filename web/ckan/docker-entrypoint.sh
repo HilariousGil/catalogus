@@ -21,6 +21,8 @@ echo Building db
 
 cd /src/ckan
 
+# init database
+paster db init -c /app/config.ini
 # rebuild solr index
 paster search-index rebuild -c /app/config.ini
 # start service
