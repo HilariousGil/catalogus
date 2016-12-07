@@ -1,4 +1,10 @@
-eenmalige setup DB
-pg_restore -d ckan -h database_ckan -p 5432 -U ckan /data/dump.pgsql
+###eenmalige setup DB
+
+    $ pg_restore -d ckan -h database_ckan -p 5432 -U ckan /data/dump.pgsql
 
 
+###aanmaken sysadmin account
+
+    $ paster sysadmin add seanh -c /app/config.ini
+
+    Je wordt daarna gevraagd een password aan te maken als deze gebruiker nog niet bestaat
