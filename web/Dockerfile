@@ -26,7 +26,9 @@ RUN apt-get update \
 RUN adduser --system ckan
 
 # Installing UWSGI en CKAN
+RUN pip install boto==2.43.0
 RUN pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.6.0#egg=ckan'
+RUN pip install -e 'git+https://github.com/open-data/ckanext-cloudstorage#egg=ckanext-cloudstorage'
 # Installing CKAN dependencies
 
 # Inject setuptools 20.4 to prevent exception

@@ -5,6 +5,7 @@
 
 ### Aanmaken sysadmin account
 
-    $ paster sysadmin add seanh -c /app/config.ini
+        $ paster sysadmin add <user-name> -c /app/config.ini
 
     Je wordt daarna gevraagd een password aan te maken als deze gebruiker nog niet bestaat
+
