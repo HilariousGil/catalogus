@@ -51,4 +51,7 @@ COPY ckan /app/
 #COPY cloudfuse /home/ckan/.cloudfuse
 RUN export CKAN_INI=/app/config.ini
 
+ARG OS_PASSWORD_CATALOGUS
+ENV OS_PASSWORD_CATALOGUS=OS_PASSWORD_CATALOGUS
+
 CMD /app/docker-entrypoint.sh
