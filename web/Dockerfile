@@ -1,6 +1,9 @@
 FROM ubuntu:16.04
 MAINTAINER datapunt.ois@amsterdam.nl
 
+ARG OS_PASSWORD_CATALOGUS
+ENV OS_PASSWORD_CATALOGUS=$OS_PASSWORD_CATALOGUS
+
 EXPOSE 5000
 
 # Preventing frontend error
@@ -48,10 +51,6 @@ RUN mkdir -p /etc/ckan/default \
 # Setting ckan app
 USER ckan
 COPY ckan /app/
-#COPY cloudfuse /home/ckan/.cloudfuse
 RUN export CKAN_INI=/app/config.ini
-
-ARG OS_PASSWORD_CATALOGUS
-ENV OS_PASSWORD_CATALOGUS=$OS_PASSWORD_CATALOGUS
 
 CMD /app/docker-entrypoint.sh
