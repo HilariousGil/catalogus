@@ -22,4 +22,9 @@ ckan:
   environment:
     CKAN_SQLALCHEMY_URL: postgresql://catalogus:insecure@database/catalogus
     CKAN_SOLR_URL: http://solr:8983/solr/ckan
-#    DEBIAN_FRONTEND: "noninteractive"
+    OS_PASSWORD_CATALOGUS:
+    OS_TENANT_CATALOGUS:
+  cap_add:
+    - SYS_ADMIN
+  devices:
+    - "/dev/fuse"

@@ -18,17 +18,22 @@ RUN apt-get update \
 		python-pip \
 		python-virtualenv \
 		netcat-openbsd \
-        curl \
+        build-essential build-essential libcurl4-openssl-dev libxml2-dev \
+        libssl-dev libfuse-dev libjson-c-dev wget pkg-config fuse \
+        curl wget unzip \
 	&& apt-get clean \
-	&& pip install --upgrade pip
+	&& pip install --upgrade pip \
+	## Install cloudfuse
+	&& wget https://github.com/redbo/cloudfuse/archive/master.zip \
+	&& unzip master.zip && cd cloudfuse-master \
+    && ./configure && make && make install && cd ..
+
 
 # Adding user
 RUN adduser --system ckan
 
 # Installing UWSGI en CKAN
-RUN pip install boto==2.43.0
 RUN pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.6.0#egg=ckan'
-RUN pip install -e 'git+https://github.com/open-data/ckanext-cloudstorage#egg=ckanext-cloudstorage'
 # Installing CKAN dependencies
 
 # Inject setuptools 20.4 to prevent exception
@@ -43,6 +48,7 @@ RUN mkdir -p /etc/ckan/default \
 # Setting ckan app
 USER ckan
 COPY ckan /app/
+#COPY cloudfuse /home/ckan/.cloudfuse
 RUN export CKAN_INI=/app/config.ini
 
 CMD /app/docker-entrypoint.sh
