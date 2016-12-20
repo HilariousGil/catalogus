@@ -25,9 +25,12 @@ node {
 
     stage("Build develop image") {
         tryStep "build", {
-            def image = docker.build("build.datapunt.amsterdam.nl:5000/datapunt/catalogus:${env.BUILD_NUMBER}", "web")
-            image.push()
-            image.push("acceptance")
+            withCredentials([[$class: 'StringBinding', credentialsId: 'OS_PASSWORD_CATALOGUS', variable: 'OS_PASSWORD_CATALOGUS'],
+                             [$class: 'StringBinding', credentialsId: 'OS_TENANT_CATALOGUS', variable: 'OS_TENANT_CATALOGUS']]) {
+                def image = docker.build("build.datapunt.amsterdam.nl:5000/datapunt/catalogus:${env.BUILD_NUMBER}", "web")
+                image.push()
+                image.push("acceptance")
+            }
         }
         tryStep "build SOLR", {
             def image = docker.build("build.datapunt.amsterdam.nl:5000/datapunt/catalogus-solr:${env.BUILD_NUMBER}", "solr")
