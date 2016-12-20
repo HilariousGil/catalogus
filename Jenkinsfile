@@ -25,8 +25,7 @@ node {
 
     stage("Build develop image") {
         tryStep "build", {
-            withCredentials([[$class: 'StringBinding', credentialsId: 'OS_PASSWORD_CATALOGUS', variable: 'OS_PASSWORD_CATALOGUS'],
-                             [$class: 'StringBinding', credentialsId: 'OS_TENANT_CATALOGUS', variable: 'OS_TENANT_CATALOGUS']]) {
+            withCredentials([[$class: 'StringBinding', credentialsId: 'OS_PASSWORD_CATALOGUS', variable: 'OS_PASSWORD_CATALOGUS']]) {
                 def image = docker.build("build.datapunt.amsterdam.nl:5000/datapunt/catalogus:${env.BUILD_NUMBER}", "web")
                 image.push()
                 image.push("acceptance")
