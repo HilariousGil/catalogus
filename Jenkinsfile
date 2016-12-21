@@ -29,7 +29,6 @@ node {
         stage("Build develop image") {
             tryStep "build", {
                 def image = docker.build("build.datapunt.amsterdam.nl:5000/datapunt/catalogus:${env.BUILD_NUMBER}", "web")
-//                image.inside('-e "OS_PASSWORD_CATALOGUS=${env.OS_PASSWORD_CATALOGUS}"')
                 image.push()
                 image.push("acceptance")
             }
