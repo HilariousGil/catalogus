@@ -24,8 +24,8 @@ node {
     }
 
     withCredentials([[$class: 'StringBinding',
-                      credentialsId: 'OS_PASSWORD_CATALOGUS',
-                      variable: 'OS_PASSWORD_CATALOGUS']]) {
+                      credentialsId: 'CATALOGUS_OS_PASSWORD',
+                      variable: 'CATALOGUS_OS_PASSWORD']]) {
         stage("Build develop image") {
             tryStep "build", {
                 def image = docker.build("build.datapunt.amsterdam.nl:5000/datapunt/catalogus:${env.BUILD_NUMBER}", "web")

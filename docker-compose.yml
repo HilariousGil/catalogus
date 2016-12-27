@@ -22,7 +22,7 @@ ckan:
   environment:
     CKAN_SQLALCHEMY_URL: postgresql://catalogus:insecure@database/catalogus
     CKAN_SOLR_URL: http://solr:8983/solr/ckan
-    OS_PASSWORD_CATALOGUS: insecure
+    CATALOGUS_OS_PASSWORD: insecure
   cap_add:
     - SYS_ADMIN
   devices:
