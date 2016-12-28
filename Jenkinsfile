@@ -23,9 +23,7 @@ node {
         checkout scm
     }
 
-    withCredentials([[$class: 'StringBinding',
-                      credentialsId: 'CATALOGUS_OBJECTSTORE_PASSWORD',
-                      variable: 'CATALOGUS_OBJECTSTORE_PASSWORD']]) {
+    withCredentials([[$class: 'StringBinding', credentialsId: 'CATALOGUS_OBJECTSTORE_PASSWORD', variable: 'CATALOGUS_OBJECTSTORE_PASSWORD']]) {
         stage("Build develop image") {
             tryStep "build", {
                 def image = docker.build("build.datapunt.amsterdam.nl:5000/datapunt/catalogus:${env.BUILD_NUMBER}", "web")
