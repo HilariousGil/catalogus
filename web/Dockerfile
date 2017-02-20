@@ -49,7 +49,7 @@ RUN mkdir -p /etc/ckan/default \
 	&& chown -R ckan /etc/ckan /var/lib/ckan
 
 # Copy the private datasets plugin
-COPY ckanext-privatedatasets /src/ckanext-privatedatasets
+COPY ckanext-privatedatasets /src/
 
 # Copy the private DCAT plugin
 #COPY ckanext-dcat /src/ckanext-dcat
