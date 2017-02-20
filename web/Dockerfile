@@ -48,9 +48,22 @@ RUN mkdir -p /etc/ckan/default \
 	&& mkdir /var/lib/ckan \
 	&& chown -R ckan /etc/ckan /var/lib/ckan
 
+# Copy the private datasets plugin
+COPY ckanext-privatedatasets /src/ckanext-privatedatasets
+
+# Copy the private DCAT plugin
+#COPY ckanext-dcat /src/ckanext-dcat
+
+# make sure the the plugins are installed in develop mode
+RUN cd /src/ckanext-privatedatasets && python setup.py develop
+#RUN cd /src/ckanext-dcat && python setup.py develop
+RUN chown -R ckan /src/ckanext-*
+
 # Setting ckan app
 USER ckan
 COPY ckan /app/
+
+
 RUN export CKAN_INI=/app/config.ini
 
 CMD /app/docker-entrypoint.sh
