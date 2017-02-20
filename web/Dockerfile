@@ -51,8 +51,9 @@ RUN mkdir -p /etc/ckan/default \
 # Copy the private datasets plugin
 COPY ckanext-privatedatasets /src/ckanext-privatedatasets
 
+WORKDIR /src/ckanext-privatedatasets
 # make sure the the plugins are installed in develop mode
-RUN cd /src/ckanext-privatedatasets && python setup.py develop
+RUN python setup.py develop
 
 RUN chown -R ckan /src/ckanext-*
 
