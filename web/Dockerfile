@@ -56,7 +56,8 @@ COPY ckanext-privatedatasets /src/ckanext-privatedatasets
 
 RUN chown -R ckan /src/ckanext-*
 # make sure the the plugins are installed in develop mode
-RUN cd /src/ckanext-privatedatasets && python setup.py develop
+RUN cd /src/ckanext-privatedatasets
+RUN python setup.py develop
 #RUN cd /src/ckanext-dcat && python setup.py develop
 
 # Setting ckan app
