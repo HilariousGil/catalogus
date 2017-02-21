@@ -41,6 +41,9 @@ RUN pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.6.0#egg=ckan'
 
 # Inject setuptools 20.4 to prevent exception
 RUN sed -i '1s/^/setuptools==20.4 /' /src/ckan/requirements.txt
+RUN echo "datapunt-authorization==0.2.0" >> /src/ckan/requirements.txt
+RUN echo "PyJWT>=1.4.2" >> /src/ckan/requirements.txt
+
 
 RUN pip install -r /src/ckan/requirements.txt
 RUN mkdir -p /etc/ckan/default \
@@ -48,11 +51,15 @@ RUN mkdir -p /etc/ckan/default \
 	&& mkdir /var/lib/ckan \
 	&& chown -R ckan /etc/ckan /var/lib/ckan
 
-# Copy the private datasets plugin
+# Copy plugins
 COPY ckanext-privatedatasets /src/ckanext-privatedatasets
+COPY ckanext-iauthfunctions /src/ckanext-iauthfunctions
 
 WORKDIR /src/ckanext-privatedatasets
 # make sure the the plugins are installed in develop mode
+RUN python setup.py develop
+
+WORKDIR /src/ckanext-iauthfunctions
 RUN python setup.py develop
 
 RUN chown -R ckan /src/ckanext-*
